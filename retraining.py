@@ -73,4 +73,6 @@ with open("metrics.txt", 'w') as outfile:
 model_filename = 'model/logistic_regression_model.pkl'
 joblib.dump(best_model, model_filename)
 
-print("--------The train process finished--------")
+print("--------The train process finished!--------")
+
+# THis is a change
