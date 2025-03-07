@@ -11,7 +11,7 @@ on:
 jobs:
   retraining_model:
     runs-on: ubuntu-latest
-    container: dvcorg/cml:latest
+    container: docker://dvcorg/cml:latest
 
     env:
       repo_token: ${{ secrets.TOKEN }}
