@@ -32,11 +32,21 @@ jobs:
       - name: Generating report
         run: |
           echo "# Model metrics" > report.md
-          
           echo "## Training accuracy" >> report.md
-          cat metrics.txt >> report.md
+          
+          if [ -f metrics.txt ]; then
+            cat metrics.txt >> report.md
+          else
+            echo "No metrics available" >> report.md
+          fi
           
           echo "## Data visualization" >> report.md
-          cml-publish feature_importance.png --md >> report.md
           
-          cml-send-comment report
+          if [ -f feature_importance.png ]; then
+            cml comment create "![Feature Importance](feature_importance.png)" --target report.md
+          else
+            echo "No feature importance image found" >> report.md
+          fi
+
+      - name: Post report comment
+        run: cml comment create report.md
