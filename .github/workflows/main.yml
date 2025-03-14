@@ -38,9 +38,15 @@ jobs:
           cat metrics.txt >> report.md
           
           echo "## Data visualization" >> report.md
-          cml publish feature_importance.png --md >> report.md
+          echo "![inline](feature_importance.png)" >> report.md
           
           cml comment create report.md
+
+      - name: Upload report.md as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: report.md
 
   build_docker_image:
     needs: retraining_model
