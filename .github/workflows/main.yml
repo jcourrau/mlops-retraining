@@ -11,6 +11,10 @@ on:
 jobs:
   retraining_model:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     container: docker://dvcorg/cml:latest
     env:
       repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -34,9 +38,9 @@ jobs:
           cat metrics.txt >> report.md
           
           echo "## Data visualization" >> report.md
-          cml-publish feature_importance.png --md >> report.md
+          cml publish feature_importance.png --md >> report.md
           
-          cml-send-comment report.md
+          cml comment create report.md
 
   build_docker_image:
     needs: retraining_model
