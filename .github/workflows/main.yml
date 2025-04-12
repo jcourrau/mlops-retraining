@@ -26,11 +26,14 @@ jobs:
           echo "Path:" $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE
 
+      - name: Show file contents
+        run: cat $GITHUB_WORKSPACE/requirements.txt
+
       - name: Upgrade pip
         run: pip install --upgrade pip
 
       - name: Install requirements
-        run: pip3 install -r $GITHUB_WORKSPACE/requirements.txt
+        run: pip3 install -r requirements.txt
 
 
       - name: Execute the training model
