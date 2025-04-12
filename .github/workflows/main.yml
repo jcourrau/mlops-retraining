@@ -21,13 +21,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Debug path
+        run: |
+          echo "Path:" $GITHUB_WORKSPACE
+          ls -la $GITHUB_WORKSPACE
+
       - name: Upgrade pip
         run: pip install --upgrade pip
 
       - name: Install requirements
-        working-directory: ${{ github.workspace }}
-        run:
-          pip3 install -r requirements.txt
+        run: pip3 install -r $GITHUB_WORKSPACE/requirements.txt
+
 
       - name: Execute the training model
         run: |
