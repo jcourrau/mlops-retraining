@@ -25,6 +25,7 @@ jobs:
         run: pip install --upgrade pip
 
       - name: Install requirements
+        working-directory: ${{ github.workspace }}
         run:
           pip3 install -r requirements.txt
 
